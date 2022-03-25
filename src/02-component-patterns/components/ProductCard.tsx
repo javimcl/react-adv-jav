@@ -44,8 +44,3 @@ export const ProductCard = ({ children, product }: ProductCardProps) => {
         </Provider>
     )
 }
-
-
-ProductCard.Title = ProductoTitle
-ProductCard.Image = ProductoImage
-ProductCard.Button = ProductButtons

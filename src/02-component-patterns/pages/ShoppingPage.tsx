@@ -1,5 +1,5 @@
-import React from 'react'
-import { ProductButtons, ProductCard, ProductoImage, ProductoTitle } from '../components/ProductCard';
+
+import { ProductButtons, ProductCard, ProductoImage, ProductoTitle } from '../components/';
 
 
 const product = {
@@ -24,7 +24,7 @@ export const ShoppingPage = () => {
             <ProductCard product={product}>
                <ProductCard.Image/>
                <ProductCard.Title title={'Cafee'}/>
-               <ProductButtons />
+               <ProductCard.Buttons />
 
 
             </ProductCard>
