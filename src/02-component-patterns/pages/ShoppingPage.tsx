@@ -1,6 +1,6 @@
 
 import { ProductButtons, ProductCard, ProductoImage, ProductoTitle } from '../components/';
-
+import '../styles/custom-styles.css'
 
 const product = {
 
@@ -12,7 +12,8 @@ const product = {
 
 export const ShoppingPage = () => {
     return (
-        <div> <h1>ProductCard</h1>
+        <div className='bg-dark'> 
+            <h1>ProductCard</h1>
             <hr />
             <div style={{
                 display:'flex',
