@@ -1,18 +1,26 @@
 
+
 import { ProductButtons, ProductCard, ProductoImage, ProductoTitle } from '../components/';
+import { products } from '../data/products';
+import { useShoppingCart } from '../hooks/useShoppingCart';
 import '../styles/custom-styles.css'
 
-const product = {
 
-    id: '1',
-    title: 'Coffeee Mug- card',
-    img: './coffee-mug.png'
 
-}
+
+
+
+
 
 export const ShoppingPage = () => {
+
+    const {shoppingCart, onProductCountChange} = useShoppingCart();
+
+
+    
+
     return (
-        <div className='bg-dark'>
+        <div >
             <h1>ProductCard</h1>
             <hr />
             <div style={{
@@ -21,45 +29,57 @@ export const ShoppingPage = () => {
                 flexWrap: 'wrap'
             }}>
 
+                {
+                    products.map(product => (
+                        <ProductCard
+                            key={product.id}
+                            product={product}
+                            className="bg-dark text-white"
+                            onChange={(evento) => onProductCountChange(evento)}
+                            value={shoppingCart[product.id]?.count || 0}
+                        >
+                            <ProductoImage className="custom-image" style={{
+                                boxShadow: '10px 10px 10px rgba(0,0,0,0.2)'
+                            }} />
+                            <ProductoTitle className=" text-bold" activeClass='active' />
+                            <ProductButtons className="custom-buttons" />
+
+
+                        </ProductCard>
+
+                    ))
+                }
             </div>
-            <ProductCard product={product}
-                className="bg-dark text-white">
-                <ProductCard.Image className="custom-image" />
-                <ProductCard.Title className=" text-bold" title={'Cafee'} activeClass='active' />
-                <ProductCard.Buttons className="custom-buttons" />
+            <div className='shopping-cart'>
+
+                {
+
+                    Object.entries(shoppingCart).map(([key, product]) => (
+                        <ProductCard
+                            key={key}
+                            product={product}
+                            className="bg-dark text-white"
+                            style={{ width: '100px' }}
+                            onChange={onProductCountChange}
+                            value={product.count} >
+                            <ProductoImage
+                                className="custom-image"
+                                style={{
+                                    boxShadow: '10px 10px 10px rgba(0,0,0,0.2)'
+                                }} />
+
+                            <ProductButtons
+                                className="custom-buttons"
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }} />
+                        </ProductCard>
+                    ))
 
 
-            </ProductCard>
-
-            <ProductCard product={product}
-                className="bg-dark text-white">               
-                <ProductoImage className="custom-image" style={{
-                    boxShadow: '10px 10px 10px rgba(0,0,0,0.2)'
-                }}/>
-                <ProductoTitle className=" text-bold" activeClass='active' />
-                <ProductButtons className="custom-buttons" />
-
-
-            </ProductCard>
-            <ProductCard product={product}
-                className="bg-dark text-white"
-                style={{
-                    backgroundColor: '#70D1F8'
-                }}>
-                <ProductoImage style={{
-                    boxShadow: '10px 10px 10px rgba(0,0,0,0.2)'
-                }}  />
-                <ProductoTitle style={{
-                    fontWeight: 'bold'
-                }}  />
-                <ProductButtons style={{
-                    display: 'flex',
-                    justifyContent: 'end'
-                }} />
-
-
-            </ProductCard>
-
+                }
+            </div>
         </div>
     )
 }
